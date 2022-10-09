@@ -1,0 +1,19 @@
+{
+    "users": [
+        {
+            "name": "SCRYPT.encript(Lucas Nascimento Falcão (17100915))",
+            "password": "GCM.encript(1111111111)",
+            "salt": "Salt.generateSalt()"
+        },
+        {
+            "name": "SCRYPT.encript(Mariany Ferreira da Silva (19200646))",
+            "password": "GCM.encript(2222222222)",
+            "salt": "Salt.generateSalt()"
+        },
+        {
+            "name": "SCRYPT.encript(Mércia de Souza Maguerroski Castilho (18105221))",
+            "password": "GCM.encript(2222222222)",
+            "salt": "Salt.generateSalt()"
+        }
+    ]
+}
