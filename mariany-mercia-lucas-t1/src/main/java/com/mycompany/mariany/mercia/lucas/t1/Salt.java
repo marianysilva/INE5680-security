@@ -21,8 +21,8 @@ public class Salt {
 
         System.out.println(
             "[DEBUG] SALT GENERATE:"
-            + "\n[DEBUG] instance: SHA1PRNG"
-            + "\n[DEBUG] derivatedText: " + derivatedText
+            + "\n[DEBUG] -- instance: SHA1PRNG"
+            + "\n[DEBUG] -- derivatedText: " + derivatedText
         );
 
         return derivatedText;

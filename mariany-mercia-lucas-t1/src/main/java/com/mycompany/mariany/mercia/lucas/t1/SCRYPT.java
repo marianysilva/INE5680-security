@@ -55,12 +55,12 @@ public class SCRYPT {
 
         System.out.println(
             "[DEBUG] SCRYPT ENCRIPT:"
-            + "\n[DEBUG] text: " + text
-            + "\n[DEBUG] salt: " + salt
-            + "\n[DEBUG] costParameter: " + this.costParameter
-            + "\n[DEBUG] blocksize: " + this.blocksize
-            + "\n[DEBUG] parallelizationParam: " + this.parallelizationParam
-            + "\n[DEBUG] Chave derivada: " + derivatedText
+            + "\n[DEBUG] -- text: " + text
+            + "\n[DEBUG] -- salt: " + salt
+            + "\n[DEBUG] -- costParameter: " + this.costParameter
+            + "\n[DEBUG] -- blocksize: " + this.blocksize
+            + "\n[DEBUG] -- parallelizationParam: " + this.parallelizationParam
+            + "\n[DEBUG] -- Chave derivada: " + derivatedText
         );
 
         return derivatedText;
@@ -71,9 +71,9 @@ public class SCRYPT {
 
         System.out.println(
             "[DEBUG] SCRYPT DECRIPT:"
-            + "\n[DEBUG] derivatedText: " + derivatedText
-            + "\n[DEBUG] salt: " + salt
-            + "\n[DEBUG] text: " + text
+            + "\n[DEBUG] -- derivatedText: " + derivatedText
+            + "\n[DEBUG] -- salt: " + salt
+            + "\n[DEBUG] -- text: " + text
         );
 
         return text;

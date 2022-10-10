@@ -33,11 +33,11 @@ public class User {
     private String getPlanTextPassword(){
         return gcm.decrypt(
             this.getPassword(),
-            this.getSalt()
+            this.getSecretKey()
         );
     }
     
-    private String getSecretKey(){
+    private SecretKey getSecretKey(){
         return pbkdf2.createSecretKey(
             this.getPlanTextPassword(),
             this.getSalt()
@@ -64,15 +64,21 @@ public class User {
     }
     
     public String getCode(){
-        return this.twoFA.getTOTPCode(getSecretKey());
+        return this.twoFA.getTOTPCode(
+            getSecretKey()
+        );
     }
     
     public boolean validateName(String name){
-        return name.equals(this.getPlanTextName());
+        return name.equals(
+            this.getPlanTextName()
+        );
     }
     
     public boolean validatePassword(String password){
-        return password.equals(this.getPlanTextPassword());
+        return password.equals(
+            this.getPlanTextPassword()
+        );
     }
     
     public boolean validadeCode(String code){
@@ -84,7 +90,7 @@ public class User {
     }
 
     public String encriptPassword(String password){
-        return this.gcm.encrypt(password, getSalt());
+        return this.gcm.encrypt(password, getSecretKey());
     }
     
     public String generateSalt(){

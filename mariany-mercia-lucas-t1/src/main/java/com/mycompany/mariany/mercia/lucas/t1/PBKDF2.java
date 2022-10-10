@@ -13,8 +13,8 @@ import org.bouncycastle.jcajce.provider.BouncyCastleFipsProvider;
  * @author Mércia de Souza Maguerroski Castilho (18105221)
  */
 
-public class PBKDF2 {
-    public String createSecretKey(String text, String salt){
+public class PBKDF2 {  
+        public SecretKey createSecretKey(String text, String salt){
         int addProvider = Security.addProvider(new BouncyCastleFipsProvider());
         
         int iterations = 1000;
@@ -26,22 +26,24 @@ public class PBKDF2 {
         try {
             pbkdf2 = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA512", "BCFIPS");
             SecretKey sk = pbkdf2.generateSecret(spec);
+            
             derivedText = Hex.encodeHexString(sk.getEncoded());
+            System.out.println(
+                "[DEBUG] PBKDF2 GENERATE SECRET:"
+                + "\n[DEBUG] -- text: " + text
+                + "\n[DEBUG] -- salt: " + salt
+                + "\n[DEBUG] -- iterations: " + iterations
+                + "\n[DEBUG] -- keyLength: " + keyLength
+                + "\n[DEBUG] -- instance: PBKDF2WithHmacSHA512 BCFIPS"
+                + "\n[DEBUG] -- Chave derivada: " + derivedText
+            );
+
+            return sk;
+        
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-        System.out.println(
-            "[DEBUG] PBKDF2 GENERATE SECRET:"
-            + "\n[DEBUG] text: " + text
-            + "\n[DEBUG] salt: " + salt
-            + "\n[DEBUG] iterations: " + iterations
-            + "\n[DEBUG] keyLength: " + keyLength
-            + "\n[DEBUG] instance: PBKDF2WithHmacSHA512 BCFIPS"
-            + "\n[DEBUG] Chave derivada: " + derivedText
-        );
-
-        return derivedText;
+        return null;
     }
 
 }

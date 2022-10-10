@@ -1,5 +1,10 @@
 package com.mycompany.mariany.mercia.lucas.t1;
 
+import javax.crypto.Cipher;
+import javax.crypto.SecretKey;
+import javax.crypto.spec.GCMParameterSpec;
+import java.util.Base64;
+
 
 /**
  * @author Lucas Nascimento Falcão (17100915)
@@ -8,36 +13,67 @@ package com.mycompany.mariany.mercia.lucas.t1;
  */
 
 public class GCM {
-    private static final int MAC_SIZE = 128; // in bits
-    // AES-GCM parameters
-    private static final int AES_KEY_SIZE = 128; // in bits
-    private static final int GCM_NONCE_LENGTH = 12; // in bytes
-    private static final int GCM_TAG_LENGTH = 16; // in bytes
+
+    private final int T_LEN = 128;
     
-    public String encrypt(String text, String salt){
-        String derivatedText = "-----";
+    private Cipher encryptionCipher;
+    
+    public String encrypt(String text, SecretKey secretKey){
+        try {
+            byte[] messageInBytes = text.getBytes();
+            encryptionCipher = Cipher.getInstance("AES/GCM/NoPadding");
+            encryptionCipher.init(Cipher.ENCRYPT_MODE, secretKey);
+            byte[] encryptedBytes = encryptionCipher.doFinal(messageInBytes);
 
-        System.out.println(
-            "[DEBUG] GCM ENCRIPT:"
-            + "\n[DEBUG] text: " + text
-            + "\n[DEBUG] salt: " + salt
-            + "\n[DEBUG] Chave derivada: " + derivatedText
-        );
+            String derivatedText = encode(encryptedBytes);
 
-        return derivatedText;
+            System.out.println(
+                "[DEBUG] GCM ENCRIPT:"
+                + "\n[DEBUG] -- text: " + text
+                + "\n[DEBUG] -- secretKey: " + secretKey
+                + "\n[DEBUG] -- Chave derivada: " + derivatedText
+            );
+
+            return derivatedText;
+        } catch (Exception e) {
+             e.printStackTrace();
+        }
+        return null;
     }
     
         
-    public String decrypt(String derivatedText, String salt){
-        String text = "-----";
+    public String decrypt(String derivatedText, SecretKey secretKey){
+        try {
+            byte[] messageInBytes = decode(derivatedText);
+            Cipher decryptionCipher = Cipher.getInstance("AES/GCM/NoPadding");
+            GCMParameterSpec spec = new GCMParameterSpec(
+                T_LEN,
+                encryptionCipher.getIV()
+            );
+            decryptionCipher.init(Cipher.DECRYPT_MODE, secretKey, spec);
+            byte[] decryptedBytes = decryptionCipher.doFinal(messageInBytes);
 
-        System.out.println(
-            "[DEBUG] GCM DECRIPT:"
-            + "\n[DEBUG] derivatedText: " + derivatedText
-            + "\n[DEBUG] salt: " + salt
-            + "\n[DEBUG] text: " + text
-        );
+            String text = new String(decryptedBytes);
 
-        return text;
+            System.out.println(
+                "[DEBUG] GCM DECRIPT:"
+                + "\n[DEBUG] -- derivatedText: " + derivatedText
+                + "\n[DEBUG] -- secretKey: " + secretKey
+                + "\n[DEBUG] -- text: " + text
+            );
+
+            return text;
+        } catch (Exception e) {
+             e.printStackTrace();
+        }
+        return null;
+    }
+    
+    private String encode(byte[] data) {
+        return Base64.getEncoder().encodeToString(data);
+    }
+
+    private byte[] decode(String data) {
+        return Base64.getDecoder().decode(data);
     }
 }

@@ -1,5 +1,7 @@
 package com.mycompany.mariany.mercia.lucas.t1;
 
+import javax.crypto.SecretKey;
+
 /**
  * @author Lucas Nascimento Falcão (17100915)
  * @author Mariany Ferreira da Silva (19200646)
@@ -22,16 +24,18 @@ public class Main {
           
         try {
             
-            String text = "Mariany";
-            String salt = saltGenerator.getSalt();
-     
-            String textGCMencrypt = gcm.encrypt(text, salt); // to do
-            String textGCMdecrypt = gcm.decrypt(textGCMencrypt, salt); // to do
-     
-            String textSCRYPTencrypt = scrypt.encrypt(text, salt); // ok
+            String name = "Mariany Ferreira da Silva (19200646)";
+            String password = "2222222222";
+            String salt = saltGenerator.getSalt(); // ok
+    
+            SecretKey secretKey = pbkdf2.createSecretKey(password, salt); // ok
+             
+            String textSCRYPTencrypt = scrypt.encrypt(name, salt); // ok
             String textSCRYPTdecrypt = scrypt.decrypt(textSCRYPTencrypt, salt); // to do
+    
+            String textGCMencrypt = gcm.encrypt(password, secretKey); // ok
+            String textGCMdecrypt = gcm.decrypt(textGCMencrypt, secretKey); // ok
             
-            String secretKey = pbkdf2.createSecretKey(text, salt); // ok
             String code = twoFA.getTOTPCode(secretKey); // ok
     
         } catch (Exception e) {

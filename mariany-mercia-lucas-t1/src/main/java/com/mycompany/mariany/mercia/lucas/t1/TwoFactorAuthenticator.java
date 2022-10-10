@@ -10,6 +10,7 @@ import org.apache.commons.codec.binary.Hex;
 import de.taimos.totp.TOTP;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import javax.crypto.SecretKey;
 
 /**
  * @author Lucas Nascimento Falcão (17100915)
@@ -21,38 +22,20 @@ public class TwoFactorAuthenticator {
     
     // https://github.com/taimos/totp/blob/master/src/main/java/de/taimos/totp/TOTP.java
     // TOTP Code permanece válido por 30 segundos
-    public String getTOTPCode(String secretKey) {
+    public String getTOTPCode(SecretKey secretKey) {
+        String sk = Hex.encodeHexString(secretKey.getEncoded());
         Base32 base32 = new Base32();
-        byte[] bytes = base32.decode(secretKey);
+        byte[] bytes = base32.decode(sk);
         String hexKey = Hex.encodeHexString(bytes);
         
         String OTP = TOTP.getOTP(hexKey);
         
         System.out.println(
             "[DEBUG] TOTP GENERATE CODE:"
-            + "\n[DEBUG] secretKey: " + secretKey
-            + "\n[DEBUG] OTP: " + OTP
+            + "\n[DEBUG] -- secretKey: " + secretKey
+            + "\n[DEBUG] -- OTP: " + OTP
         );
                 
         return OTP;
-    }
-    
-    private static void createQRCode(
-        String codeData,
-        String filePath,
-        int height,
-        int width
-    )
-            throws WriterException, IOException {
-        BitMatrix matrix = new MultiFormatWriter().encode(
-            codeData,
-            BarcodeFormat.QR_CODE,
-            246,
-            246
-        );
-        try (FileOutputStream out = new FileOutputStream("QRCode.png")) {
-            MatrixToImageWriter.writeToStream(matrix, "png", out);
-        }
-
     }
 }
