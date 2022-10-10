@@ -14,17 +14,30 @@ public class GCM {
     private static final int GCM_NONCE_LENGTH = 12; // in bytes
     private static final int GCM_TAG_LENGTH = 16; // in bytes
     
-    public String encript(String text, String salt){
-        String derivatedText = "";
+    public String encrypt(String text, String salt){
+        String derivatedText = "-----";
 
-        System.out.println("[DEBUG] Chave derivada usando GCM: ");
-        System.out.println(derivatedText);
+        System.out.println(
+            "[DEBUG] GCM ENCRIPT:"
+            + "\n[DEBUG] text: " + text
+            + "\n[DEBUG] salt: " + salt
+            + "\n[DEBUG] Chave derivada: " + derivatedText
+        );
 
         return derivatedText;
     }
     
         
-    public String decript(String text, String salt){
-        return "";
+    public String decrypt(String derivatedText, String salt){
+        String text = "-----";
+
+        System.out.println(
+            "[DEBUG] GCM DECRIPT:"
+            + "\n[DEBUG] derivatedText: " + derivatedText
+            + "\n[DEBUG] salt: " + salt
+            + "\n[DEBUG] text: " + text
+        );
+
+        return text;
     }
 }

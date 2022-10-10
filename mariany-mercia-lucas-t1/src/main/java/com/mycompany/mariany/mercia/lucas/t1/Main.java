@@ -10,33 +10,63 @@ public class Main {
     
     public static void main(String[] args) {
         
-        Client client = new Client();
-        Server server = new Server();
+        UserClient client = new UserClient();
+        
+        
+        /* ------------------- TESTES DO QUE JA TA PRONTO --------------------*/
+        SCRYPT scrypt = new SCRYPT();
+        GCM gcm = new GCM();
+        PBKDF2 pbkdf2 = new PBKDF2();
+        TwoFactorAuthenticator twoFA = new TwoFactorAuthenticator();
+        Salt saltGenerator = new Salt();
+          
+        try {
+            
+            String text = "Mariany";
+            String salt = saltGenerator.getSalt();
+     
+            String textGCMencrypt = gcm.encrypt(text, salt); // to do
+            String textGCMdecrypt = gcm.decrypt(textGCMencrypt, salt); // to do
+     
+            String textSCRYPTencrypt = scrypt.encrypt(text, salt); // ok
+            String textSCRYPTdecrypt = scrypt.decrypt(textSCRYPTencrypt, salt); // to do
+            
+            String secretKey = pbkdf2.createSecretKey(text, salt); // ok
+            String code = twoFA.getTOTPCode(secretKey); // ok
+    
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+           
+        /* -------------------------------------------------------------------*/
 
         int selectedOption = client.getMenuSelectedOption();
-        while (selectedOption > 0) {
+        while (selectedOption > 0 && selectedOption < 3) {
             
-            String[] userInputs = client.getUserInputs();    
+            UserServer server = new UserServer();
+            String[] userInputs = client.getUserInputs();
+            String name = userInputs[0];
+            String password = userInputs[1];
             
             switch(selectedOption){
                 case 1:
                     server.createUser(
-                        userInputs[0],
-                        userInputs[1]
+                        name,
+                        password
                     );
                     break;
                 case 2:
-                    User user = server.validateUser(
-                        userInputs[0],
-                        userInputs[1]
+                    String code = server.validateUser(
+                        name,
+                        password
                     );
                                        
-                    if (user != null) {
-                        String code = client.get2FACode(
-                            user.getCode()
+                    if (code != null) {
+                        String codeInput = client.get2FACode(
+                            code
                         );
                         
-                        if (server.validateUserCode(user, code)) {
+                        if (server.validateUserCode(codeInput)) {
                             client.loginSuccess();
                         } else {
                             client.userCodeError();
@@ -50,24 +80,4 @@ public class Main {
             selectedOption = client.getMenuSelectedOption();
         }
     }
-    
-    // cadastrar ou logar?
-    // cadastra
-    // login
-    //  user, password
-    //  2 factor authenticator
-    //      gerar o TOTP  
-    
-//    
-//    name, password = Client.getLogin()
-//            
-//    Server.login(name, password)
-//    
-//    if true 
-//       Server.getTwoFactorAuth()
-//       Server.validateToken()
-//       if true
-//            Client.successfullLogin()
-//       else
-//            Client.failLogin()
 }

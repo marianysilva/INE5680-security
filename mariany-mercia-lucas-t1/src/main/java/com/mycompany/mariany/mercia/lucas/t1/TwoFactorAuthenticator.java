@@ -25,7 +25,16 @@ public class TwoFactorAuthenticator {
         Base32 base32 = new Base32();
         byte[] bytes = base32.decode(secretKey);
         String hexKey = Hex.encodeHexString(bytes);
-        return TOTP.getOTP(hexKey);
+        
+        String OTP = TOTP.getOTP(hexKey);
+        
+        System.out.println(
+            "[DEBUG] TOTP GENERATE CODE:"
+            + "\n[DEBUG] secretKey: " + secretKey
+            + "\n[DEBUG] OTP: " + OTP
+        );
+                
+        return OTP;
     }
     
     private static void createQRCode(

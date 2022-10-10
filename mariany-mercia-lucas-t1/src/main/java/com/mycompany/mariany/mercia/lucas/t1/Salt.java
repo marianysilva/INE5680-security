@@ -19,8 +19,11 @@ public class Salt {
         
         String derivatedText = Hex.encodeHexString(salt);
 
-        System.out.println("[DEBUG] Chave derivada usando SALT: ");
-        System.out.println(derivatedText);
+        System.out.println(
+            "[DEBUG] SALT GENERATE:"
+            + "\n[DEBUG] instance: SHA1PRNG"
+            + "\n[DEBUG] derivatedText: " + derivatedText
+        );
 
         return derivatedText;
     }

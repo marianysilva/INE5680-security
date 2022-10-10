@@ -16,7 +16,7 @@ import java.util.Scanner;
  * @author Mércia de Souza Maguerroski Castilho (18105221)
  */
 
-public class Client {
+public class UserClient {
     private final Scanner scanner = new Scanner(System.in);
 
     private static void createQRCode(
@@ -40,9 +40,9 @@ public class Client {
 
     public int getMenuSelectedOption() {
         System.out.println("Digite uma das opções:"
-                + "0 - Encerar"
-                + "1 - Cadastrar novo usuário"
-                + "2 - Login"
+                + "\n0 - Encerar"
+                + "\n1 - Cadastrar novo usuário"
+                + "\n2 - Login"
         );
         int selectedOption = Integer.parseInt(this.scanner.nextLine());
         return selectedOption;

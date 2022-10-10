@@ -31,7 +31,7 @@ public class User {
     }
       
     private String getPlanTextPassword(){
-        return gcm.decript(
+        return gcm.decrypt(
             this.getPassword(),
             this.getSalt()
         );
@@ -45,7 +45,7 @@ public class User {
     }
     
     public String getPlanTextName(){
-        return scrypt.decript(
+        return scrypt.decrypt(
             this.getName(),
             this.getSalt()
         );
@@ -80,11 +80,11 @@ public class User {
     }
     
     public String encriptName(String name){
-        return this.scrypt.encript(name, getSalt());
+        return this.scrypt.encrypt(name, getSalt());
     }
 
     public String encriptPassword(String password){
-        return this.gcm.encript(password, getSalt());
+        return this.gcm.encrypt(password, getSalt());
     }
     
     public String generateSalt(){

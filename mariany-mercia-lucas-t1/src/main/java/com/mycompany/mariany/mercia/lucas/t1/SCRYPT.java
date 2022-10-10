@@ -41,7 +41,7 @@ public class SCRYPT {
     }
     
    
-    public String encript(String text, String salt){
+    public String encrypt(String text, String salt){
         byte[] derivedKeyFromScrypt;
         derivedKeyFromScrypt = useScryptKDF(
             text.toCharArray(),
@@ -53,13 +53,29 @@ public class SCRYPT {
 
         String derivatedText = Hex.encodeHexString(derivedKeyFromScrypt);
 
-        System.out.println("[DEBUG] Chave derivada usando SCRYPT: ");
-        System.out.println(derivatedText);
+        System.out.println(
+            "[DEBUG] SCRYPT ENCRIPT:"
+            + "\n[DEBUG] text: " + text
+            + "\n[DEBUG] salt: " + salt
+            + "\n[DEBUG] costParameter: " + this.costParameter
+            + "\n[DEBUG] blocksize: " + this.blocksize
+            + "\n[DEBUG] parallelizationParam: " + this.parallelizationParam
+            + "\n[DEBUG] Chave derivada: " + derivatedText
+        );
 
         return derivatedText;
     }
     
-    public String decript(String text, String salt){
-        return "";
+    public String decrypt(String derivatedText, String salt){
+        String text = "-----";
+
+        System.out.println(
+            "[DEBUG] SCRYPT DECRIPT:"
+            + "\n[DEBUG] derivatedText: " + derivatedText
+            + "\n[DEBUG] salt: " + salt
+            + "\n[DEBUG] text: " + text
+        );
+
+        return text;
     }
 }

@@ -9,9 +9,10 @@ package com.mycompany.mariany.mercia.lucas.t1;
  *
  * @author bacon
  */
-public class Server {
+public class UserServer {
     
     Database db = new Database();
+    User user = null;
     
     public void createUser(String name, String password){
         try {
@@ -21,16 +22,22 @@ public class Server {
         }
     }
     
-    public User validateUser(String name, String password){
+    public String validateUser(String name, String password){
         try {
-            return db.findUser(name, password);
+            user = db.findUser(name, password);
+            if (user != null) {
+                return user.getCode();
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
         return null;
     }
     
-    public boolean validateUserCode(User user, String code){
+    public boolean validateUserCode(String code){
+        if (user == null){
+            return false;
+        }
         return user.validadeCode(code);
     }
 }
