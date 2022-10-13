@@ -95,46 +95,24 @@
           <option name="timeStamp" value="5" />
         </breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/mycompany/mariany/mercia/lucas/t1/Database.java</url>
-          <line>80</line>
-          <option name="timeStamp" value="20" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/mycompany/mariany/mercia/lucas/t1/Main.java</url>
           <line>83</line>
           <option name="timeStamp" value="22" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/mycompany/mariany/mercia/lucas/t1/Main.java</url>
-          <line>86</line>
-          <option name="timeStamp" value="25" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-method">
-          <url>file://$PROJECT_DIR$/src/main/java/com/mycompany/mariany/mercia/lucas/t1/UserClient.java</url>
-          <line>78</line>
-          <properties class="com.mycompany.mariany.mercia.lucas.t1.UserClient" method="userNotFound">
-            <option name="EMULATED" value="true" />
-            <option name="WATCH_EXIT" value="false" />
-          </properties>
-          <option name="timeStamp" value="23" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-method">
-          <url>file://$PROJECT_DIR$/src/main/java/com/mycompany/mariany/mercia/lucas/t1/UserClient.java</url>
-          <line>85</line>
-          <properties class="com.mycompany.mariany.mercia.lucas.t1.UserClient" method="userCodeError">
-            <option name="EMULATED" value="true" />
-            <option name="WATCH_EXIT" value="false" />
-          </properties>
-          <option name="timeStamp" value="24" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/main/java/com/mycompany/mariany/mercia/lucas/t1/User.java</url>
-          <line>43</line>
-          <properties class="com.mycompany.mariany.mercia.lucas.t1.User" method="getSecretKey">
-            <option name="EMULATED" value="true" />
-            <option name="WATCH_EXIT" value="false" />
-          </properties>
-          <option name="timeStamp" value="26" />
+          <line>42</line>
+          <option name="timeStamp" value="75" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/mycompany/mariany/mercia/lucas/t1/User.java</url>
+          <line>74</line>
+          <option name="timeStamp" value="76" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/mycompany/mariany/mercia/lucas/t1/User.java</url>
+          <line>91</line>
+          <option name="timeStamp" value="78" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

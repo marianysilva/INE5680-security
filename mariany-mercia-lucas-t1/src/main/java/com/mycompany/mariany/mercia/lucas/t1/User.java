@@ -78,9 +78,7 @@ public class User {
     }
     
     public boolean validateName(String name){
-        return name.equals(
-            this.getPlanTextName()
-        );
+        return getName().equals(scrypt.encrypt(name, getSalt()));
     }
     
     public boolean validatePassword(String password){
@@ -90,7 +88,8 @@ public class User {
     }
     
     public boolean validadeCode(String code, String password){
-        return code.equals(this.getCode(password));
+        String text = this.getCode(password);
+        return code.equals(text);
     }
     
     public String encriptName(String name){
