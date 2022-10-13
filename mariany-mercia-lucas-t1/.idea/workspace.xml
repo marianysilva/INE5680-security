@@ -100,52 +100,41 @@
           <option name="timeStamp" value="20" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/mycompany/mariany/mercia/lucas/t1/SCRYPT.java</url>
-          <line>65</line>
-          <option name="timeStamp" value="27" />
+          <url>file://$PROJECT_DIR$/src/main/java/com/mycompany/mariany/mercia/lucas/t1/Main.java</url>
+          <line>83</line>
+          <option name="timeStamp" value="22" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/mycompany/mariany/mercia/lucas/t1/User.java</url>
-          <line>95</line>
-          <option name="timeStamp" value="28" />
+          <url>file://$PROJECT_DIR$/src/main/java/com/mycompany/mariany/mercia/lucas/t1/Main.java</url>
+          <line>86</line>
+          <option name="timeStamp" value="25" />
         </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/mycompany/mariany/mercia/lucas/t1/User.java</url>
-          <line>112</line>
-          <option name="timeStamp" value="31" />
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/src/main/java/com/mycompany/mariany/mercia/lucas/t1/UserClient.java</url>
+          <line>78</line>
+          <properties class="com.mycompany.mariany.mercia.lucas.t1.UserClient" method="userNotFound">
+            <option name="EMULATED" value="true" />
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="23" />
         </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/mycompany/mariany/mercia/lucas/t1/User.java</url>
-          <line>69</line>
-          <option name="timeStamp" value="32" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/mycompany/mariany/mercia/lucas/t1/User.java</url>
-          <line>24</line>
-          <option name="timeStamp" value="33" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/mycompany/mariany/mercia/lucas/t1/User.java</url>
-          <line>34</line>
-          <option name="timeStamp" value="35" />
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/src/main/java/com/mycompany/mariany/mercia/lucas/t1/UserClient.java</url>
+          <line>85</line>
+          <properties class="com.mycompany.mariany.mercia.lucas.t1.UserClient" method="userCodeError">
+            <option name="EMULATED" value="true" />
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="24" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/main/java/com/mycompany/mariany/mercia/lucas/t1/User.java</url>
-          <line>40</line>
+          <line>43</line>
           <properties class="com.mycompany.mariany.mercia.lucas.t1.User" method="getSecretKey">
             <option name="EMULATED" value="true" />
             <option name="WATCH_EXIT" value="false" />
           </properties>
-          <option name="timeStamp" value="34" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-method">
-          <url>file://$PROJECT_DIR$/src/main/java/com/mycompany/mariany/mercia/lucas/t1/User.java</url>
-          <line>64</line>
-          <properties class="com.mycompany.mariany.mercia.lucas.t1.User" method="getPassword">
-            <option name="EMULATED" value="true" />
-            <option name="WATCH_EXIT" value="false" />
-          </properties>
-          <option name="timeStamp" value="36" />
+          <option name="timeStamp" value="26" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

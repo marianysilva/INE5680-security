@@ -1,5 +1,7 @@
 package com.mycompany.mariany.mercia.lucas.t1;
 
+import org.bouncycastle.util.encoders.Hex;
+
 import javax.crypto.Cipher;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.GCMParameterSpec;
@@ -18,11 +20,13 @@ public class GCM {
     
     private Cipher encryptionCipher;
     
-    public String encrypt(String text, SecretKey secretKey){
+    public String encrypt(String text, SecretKey secretKey, String salt){
         try {
             byte[] messageInBytes = text.getBytes();
-            encryptionCipher = Cipher.getInstance("AES/GCM/NoPadding");
-            encryptionCipher.init(Cipher.ENCRYPT_MODE, secretKey);
+            byte[] nonce = org.apache.commons.codec.binary.Hex.decodeHex(salt.toCharArray());
+            GCMParameterSpec​ gcmParameters = new GCMParameterSpec​(T_LEN, nonce);
+            encryptionCipher = Cipher.getInstance("AES/GCM/NoPadding", "BCFIPS");
+            encryptionCipher.init(Cipher.ENCRYPT_MODE, secretKey, gcmParameters);
             byte[] encryptedBytes = encryptionCipher.doFinal(messageInBytes);
 
             String derivatedText = encode(encryptedBytes);
@@ -42,15 +46,13 @@ public class GCM {
     }
     
         
-    public String decrypt(String derivatedText, SecretKey secretKey){
+    public String decrypt(String derivatedText, SecretKey secretKey, String salt){
         try {
             byte[] messageInBytes = decode(derivatedText);
-            Cipher decryptionCipher = Cipher.getInstance("AES/GCM/NoPadding");
-            GCMParameterSpec spec = new GCMParameterSpec(
-                T_LEN,
-                encryptionCipher.getIV()
-            );
-            decryptionCipher.init(Cipher.DECRYPT_MODE, secretKey, spec);
+            Cipher decryptionCipher = Cipher.getInstance("AES/GCM/NoPadding", "BCFIPS");
+            byte[] nonce = org.apache.commons.codec.binary.Hex.decodeHex(salt.toCharArray());
+            GCMParameterSpec​ gcmParameters = new GCMParameterSpec​(T_LEN, nonce);
+            decryptionCipher.init(Cipher.DECRYPT_MODE, secretKey, gcmParameters);
             byte[] decryptedBytes = decryptionCipher.doFinal(messageInBytes);
 
             String text = new String(decryptedBytes);

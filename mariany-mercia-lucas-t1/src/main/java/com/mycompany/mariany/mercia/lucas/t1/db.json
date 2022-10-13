@@ -1,1 +1,1 @@
-{"users":[{"password":"1234","salt":null,"name":"Mercia"},{"password":"SCIsOAAvLQJOtWoWoEqpLzM=","salt":"f318cba0721d9d4b0c6229a7f481c0dd","name":"bcafc096a29f18fb0c1228bc2c207f303ce4a0f7c62a6754e90b4a2236620fcc"},{"password":"cc2dVL88x0PYGbCeTj9A+Rk=","salt":"acbcef69ea99ad2e63c91651d6579188","name":"32e8dcc14a9e1b6dff20ef653a28d78a605cd9487a5e9ee6306dd45239a3eacd"}]}
+{"users":[{"password":"1234","salt":null,"name":"Mercia"},{"password":"1234","salt":"da0a1272a42e2c18af4f7289ff1feb81","name":"mercia"}]}
