@@ -14,9 +14,9 @@ public class UserServer {
     Database db = new Database();
     User user = null;
     
-    public void createUser(String name, String password){
+    public void createUser(String name, String password, String salt){
         try {
-            db.createUser(name, password);
+            db.createUser(name, password, salt);
         } catch (Exception e) {
             e.printStackTrace();
         }

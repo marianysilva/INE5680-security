@@ -1,6 +1,7 @@
 package com.mycompany.mariany.mercia.lucas.t1;
 
 import javax.crypto.SecretKey;
+import java.security.NoSuchAlgorithmException;
 
 /**
  * @author Lucas Nascimento Falcão (17100915)
@@ -54,10 +55,17 @@ public class Main {
             
             switch(selectedOption){
                 case 1:
-                    server.createUser(
-                        name,
-                        password
-                    );
+                    try {
+                        String salt = saltGenerator.getSalt();
+                        server.createUser(
+                                name,
+                                password,
+                                salt
+                        );
+                    } catch (NoSuchAlgorithmException e) {
+                        throw new RuntimeException(e);
+                    }
+
                     break;
                 case 2:
                     String code = server.validateUser(

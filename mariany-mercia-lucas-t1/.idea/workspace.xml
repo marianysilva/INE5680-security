@@ -96,8 +96,8 @@
         </breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/mycompany/mariany/mercia/lucas/t1/Database.java</url>
-          <line>69</line>
-          <option name="timeStamp" value="18" />
+          <line>80</line>
+          <option name="timeStamp" value="20" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
