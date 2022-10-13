@@ -94,7 +94,7 @@ public class User {
     }
 
     public String encriptPassword(String password){
-        return this.gcm.encrypt(password, getSecretKey());
+        return this.gcm.encrypt(password, getSecretKey(), getSalt());
     }
     
     public String generateSalt(){
