@@ -28,8 +28,8 @@ public class Database {
 
     String userDir = System.getProperty("user.dir");
     JSONParser parser = new JSONParser();
-    public void createUser(String name, String password, String salt) {
-        User newUser = new User(name, password, salt);
+    public void createUser(String name, String password) {
+        User newUser = new User(name, password);
         JSONObject sampleObject = new JSONObject();
 
         sampleObject.put("name", newUser.name);

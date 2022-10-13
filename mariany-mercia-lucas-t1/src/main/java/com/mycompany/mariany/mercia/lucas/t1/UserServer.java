@@ -14,9 +14,9 @@ public class UserServer {
     Database db = new Database();
     User user = null;
     
-    public void createUser(String name, String password, String salt){
+    public void createUser(String name, String password){
         try {
-            db.createUser(name, password, salt);
+            db.createUser(name, password);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -26,7 +26,7 @@ public class UserServer {
         try {
             user = db.findUser(name, password);
             if (user != null) {
-                return user.getCode();
+                return user.getCode(password);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -34,10 +34,10 @@ public class UserServer {
         return null;
     }
     
-    public boolean validateUserCode(String code){
+    public boolean validateUserCode(String code, String password){
         if (user == null){
             return false;
         }
-        return user.validadeCode(code);
+        return user.validadeCode(code, password);
     }
 }

@@ -1,10 +1,5 @@
 package com.mycompany.mariany.mercia.lucas.t1;
 
-import java.security.NoSuchAlgorithmException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.crypto.SecretKeyFactory;
-import javax.crypto.spec.PBEKeySpec;
 import javax.crypto.SecretKey;
 
 /**
@@ -24,27 +19,35 @@ public class User {
     protected TwoFactorAuthenticator twoFA = new TwoFactorAuthenticator();
     protected Salt saltGenerator = new Salt();
     
+    public User(String name, String password) {
+        this.salt = this.generateSalt();
+        this.name = setName(name);
+        this.password = setPassword(password);
+    }
+
     public User(String name, String password, String salt) {
+        this.salt = salt;
         this.name = name;
         this.password = password;
-        this.salt = salt;
     }
 
-    public User() {
-
-    }
-
-    private String getPlanTextPassword(){
+    private String getPlanTextPassword(String password){
         return gcm.decrypt(
             this.getPassword(),
-            this.getSecretKey()
+            this.getSecretKey(password)
         );
     }
     
-    private SecretKey getSecretKey(){
+    private SecretKey getSecretKey(String password){
         return pbkdf2.createSecretKey(
-            this.getPlanTextPassword(),
+                password,
             this.getSalt()
+        );
+    }
+    private SecretKey generateSecretKey(String password){
+        return pbkdf2.createSecretKey(
+                password,
+                this.getSalt()
         );
     }
     
@@ -67,9 +70,9 @@ public class User {
         return this.salt;
     }
     
-    public String getCode(){
+    public String getCode(String password){
         return this.twoFA.getTOTPCode(
-            getSecretKey()
+            getSecretKey(password)
         );
     }
     
@@ -81,12 +84,12 @@ public class User {
     
     public boolean validatePassword(String password){
         return password.equals(
-            this.getPlanTextPassword()
+            this.getPlanTextPassword(password)
         );
     }
     
-    public boolean validadeCode(String code){
-        return code.equals(this.getCode());
+    public boolean validadeCode(String code, String password){
+        return code.equals(this.getCode(password));
     }
     
     public String encriptName(String name){
@@ -94,7 +97,7 @@ public class User {
     }
 
     public String encriptPassword(String password){
-        return this.gcm.encrypt(password, getSecretKey());
+        return this.gcm.encrypt(password, generateSecretKey(password));
     }
     
     public String generateSalt(){
