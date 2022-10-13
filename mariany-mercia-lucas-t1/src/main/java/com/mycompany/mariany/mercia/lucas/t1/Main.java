@@ -55,17 +55,10 @@ public class Main {
             
             switch(selectedOption){
                 case 1:
-                    try {
-                        String salt = saltGenerator.getSalt();
-                        server.createUser(
-                                name,
-                                password,
-                                salt
-                        );
-                    } catch (NoSuchAlgorithmException e) {
-                        throw new RuntimeException(e);
-                    }
-
+                    server.createUser(
+                            name,
+                            password
+                    );
                     break;
                 case 2:
                     String code = server.validateUser(
@@ -78,7 +71,7 @@ public class Main {
                             code
                         );
                         
-                        if (server.validateUserCode(codeInput)) {
+                        if (server.validateUserCode(codeInput, password)) {
                             client.loginSuccess();
                         } else {
                             client.userCodeError();
