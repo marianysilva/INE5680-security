@@ -35,7 +35,7 @@ public class Main {
             String textSCRYPTdecrypt = scrypt.decrypt(textSCRYPTencrypt, salt); // to do
     
             String textGCMencrypt = gcm.encrypt(password, secretKey, salt); // ok
-            String textGCMdecrypt = gcm.decrypt(textGCMencrypt, secretKey); // ok
+            String textGCMdecrypt = gcm.decrypt(textGCMencrypt, secretKey, salt); // ok
             
             String code = twoFA.getTOTPCode(secretKey); // ok
     

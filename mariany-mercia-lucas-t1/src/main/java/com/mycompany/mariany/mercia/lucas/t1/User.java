@@ -37,7 +37,8 @@ public class User {
     private String getPlanTextPassword(){
         return gcm.decrypt(
             this.getPassword(),
-            this.getSecretKey()
+            this.getSecretKey(), 
+                this.getSalt()
         );
     }
     

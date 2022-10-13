@@ -46,15 +46,13 @@ public class GCM {
     }
     
         
-    public String decrypt(String derivatedText, SecretKey secretKey){
+    public String decrypt(String derivatedText, SecretKey secretKey, String salt){
         try {
             byte[] messageInBytes = decode(derivatedText);
-            Cipher decryptionCipher = Cipher.getInstance("AES/GCM/NoPadding");
-            GCMParameterSpec spec = new GCMParameterSpec(
-                T_LEN,
-                encryptionCipher.getIV()
-            );
-            decryptionCipher.init(Cipher.DECRYPT_MODE, secretKey, spec);
+            Cipher decryptionCipher = Cipher.getInstance("AES/GCM/NoPadding", "BCFIPS");
+            byte[] nonce = org.apache.commons.codec.binary.Hex.decodeHex(salt.toCharArray());
+            GCMParameterSpec​ gcmParameters = new GCMParameterSpec​(T_LEN, nonce);
+            decryptionCipher.init(Cipher.DECRYPT_MODE, secretKey, gcmParameters);
             byte[] decryptedBytes = decryptionCipher.doFinal(messageInBytes);
 
             String text = new String(decryptedBytes);
