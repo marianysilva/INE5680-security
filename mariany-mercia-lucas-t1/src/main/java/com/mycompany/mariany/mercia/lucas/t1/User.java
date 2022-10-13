@@ -29,7 +29,11 @@ public class User {
         this.password = password;
         this.salt = salt;
     }
-      
+
+    public User() {
+
+    }
+
     private String getPlanTextPassword(){
         return gcm.decrypt(
             this.getPassword(),

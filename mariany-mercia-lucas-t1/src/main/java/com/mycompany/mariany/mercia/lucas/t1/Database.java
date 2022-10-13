@@ -1,10 +1,9 @@
 package com.mycompany.mariany.mercia.lucas.t1;
-import java.io.File;
 import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 
 import org.json.simple.parser.JSONParser;
 
@@ -26,17 +25,18 @@ public class Database {
         QUANDO RECUPERARMOS OS USUÁRIOS DO JSON
             TEMOS QUE MANTER O QUE ESTÁ CIFRADO NO JSON
     */
+
+    String userDir = System.getProperty("user.dir");
+    JSONParser parser = new JSONParser();
     public void createUser(String name, String password) {
         User newUser = new User(name, password, null);
         JSONObject sampleObject = new JSONObject();
-        JSONParser parser = new JSONParser();
 
         sampleObject.put("name", newUser.name);
         sampleObject.put("password", newUser.password);
         sampleObject.put("salt", newUser.salt);
 
         try {
-            String userDir = System.getProperty("user.dir");
             JSONObject obj = (JSONObject) parser.parse(new FileReader(userDir + "/src/main/java/com/mycompany/mariany/mercia/lucas/t1/db.json"));
             JSONArray users = (JSONArray) obj.get("users");
             users.add(sampleObject);
@@ -49,25 +49,29 @@ public class Database {
 
     }
 
-    public JSONArray createJson() {
-        JSONArray users = new JSONArray();
+    public ArrayList<User> getUsers() {
+        ArrayList<User> users = new ArrayList<User>();
 
-        JSONObject mainObj = new JSONObject();
-        mainObj.put("users", users);
-
-        return users;
-    }
-
-    public User[] getUsers() {
-        User[] users = new User[] {};
-        /*  PEGAR TODOS OS USUARIOS NO ARQUIVO JSON
-            TRANSFORMAR EM ARRAY DE USERS
-        */
+        try {
+            JSONObject obj = (JSONObject) parser.parse(new FileReader(userDir + "/src/main/java/com/mycompany/mariany/mercia/lucas/t1/db.json"));
+            JSONArray usersArray = (JSONArray) obj.get("users");
+            usersArray.get(0);
+            for (Object user: usersArray ) {
+                if (user instanceof JSONObject) {
+                    User newUser = new User((String) ((JSONObject) user).get("name"),
+                            (String) ((JSONObject) user).get("password"),
+                            (String) ((JSONObject) user).get("salt"));
+                    users.add(newUser);
+                }
+            }
+        } catch (IOException | ParseException e) {
+            e.printStackTrace();
+        }
         return users;
     }
  
     public User findUser(String name, String password){
-        User[] users = getUsers();
+        ArrayList<User> users = getUsers();
         
         for (User user : users){
             if(
