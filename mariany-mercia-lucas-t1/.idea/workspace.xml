@@ -114,6 +114,11 @@
           <line>27</line>
           <option name="timeStamp" value="88" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/mycompany/mariany/mercia/lucas/t1/GCM.java</url>
+          <line>32</line>
+          <option name="timeStamp" value="89" />
+        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>
