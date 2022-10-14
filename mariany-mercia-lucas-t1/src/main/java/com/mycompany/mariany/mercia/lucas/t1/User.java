@@ -52,14 +52,6 @@ public class User {
                 this.getSalt()
         );
     }
-    
-    public String getPlanTextName(){
-        return scrypt.decrypt(
-            this.getName(),
-            this.getSalt()
-        );
-    }
-
     public String getName(){
         return this.name;
     }

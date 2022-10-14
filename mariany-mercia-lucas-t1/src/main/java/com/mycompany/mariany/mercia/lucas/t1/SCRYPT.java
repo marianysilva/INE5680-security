@@ -66,25 +66,5 @@ public class SCRYPT {
         return derivatedText;
     }
     
-    public String decrypt(String derivatedText, String salt){
-        String text = "-----";
 
-        byte[] derivedKeyFromScrypt;
-        derivedKeyFromScrypt = useScryptKDF(
-                text.toCharArray(),
-                salt.getBytes(),
-                this.costParameter,
-                this.blocksize,
-                this.parallelizationParam
-        );
-
-        System.out.println(
-            "[DEBUG] SCRYPT DECRIPT:"
-            + "\n[DEBUG] -- derivatedText: " + derivatedText
-            + "\n[DEBUG] -- salt: " + salt
-            + "\n[DEBUG] -- text: " + text
-        );
-
-        return text;
-    }
 }
