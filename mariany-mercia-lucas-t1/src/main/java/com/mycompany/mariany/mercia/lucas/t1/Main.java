@@ -30,11 +30,10 @@ public class Main {
     
             SecretKey secretKey = pbkdf2.createSecretKey(password, salt); // ok
              
-            String textSCRYPTencrypt = scrypt.encrypt(name, salt); // ok
-            String textSCRYPTdecrypt = scrypt.decrypt(textSCRYPTencrypt, salt); // to do
+            String textSCRYPTencrypt = scrypt.createDerivedKey(name, salt); // ok
     
-            String textGCMencrypt = gcm.encrypt(password, secretKey); // ok
-            String textGCMdecrypt = gcm.decrypt(textGCMencrypt, secretKey); // ok
+            String textGCMencrypt = gcm.encrypt(password, secretKey, salt, name); // ok
+            String textGCMdecrypt = gcm.decrypt(textGCMencrypt, secretKey, salt, name); // ok
             
             String code = twoFA.getTOTPCode(secretKey); // ok
     
@@ -55,8 +54,8 @@ public class Main {
             switch(selectedOption){
                 case 1:
                     server.createUser(
-                        name,
-                        password
+                            name,
+                            password
                     );
                     break;
                 case 2:
@@ -70,7 +69,7 @@ public class Main {
                             code
                         );
                         
-                        if (server.validateUserCode(codeInput)) {
+                        if (server.validateUserCode(codeInput, password)) {
                             client.loginSuccess();
                         } else {
                             client.userCodeError();

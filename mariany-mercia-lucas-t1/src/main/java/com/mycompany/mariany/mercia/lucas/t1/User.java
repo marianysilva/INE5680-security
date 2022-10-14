@@ -1,10 +1,5 @@
 package com.mycompany.mariany.mercia.lucas.t1;
 
-import java.security.NoSuchAlgorithmException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.crypto.SecretKeyFactory;
-import javax.crypto.spec.PBEKeySpec;
 import javax.crypto.SecretKey;
 
 /**
@@ -24,33 +19,39 @@ public class User {
     protected TwoFactorAuthenticator twoFA = new TwoFactorAuthenticator();
     protected Salt saltGenerator = new Salt();
     
-    public User(String name, String password, String salt) {
-        this.name = name;
-        this.password = password;
-        this.salt = salt;
-    }
-      
-    private String getPlanTextPassword(){
-        return gcm.decrypt(
-            this.getPassword(),
-            this.getSecretKey()
-        );
-    }
-    
-    private SecretKey getSecretKey(){
-        return pbkdf2.createSecretKey(
-            this.getPlanTextPassword(),
-            this.getSalt()
-        );
-    }
-    
-    public String getPlanTextName(){
-        return scrypt.decrypt(
-            this.getName(),
-            this.getSalt()
-        );
+    public User(String name, String password) {
+        this.salt = this.generateSalt();
+        this.name = setName(name);
+        this.password = setPassword(password);
     }
 
+    public User(String name, String password, String salt) {
+        this.salt = salt;
+        this.name = name;
+        this.password = password;
+    }
+
+    private String getPlanTextPassword(String password){
+        return gcm.decrypt(
+                this.getPassword(),
+                this.getSecretKey(password),
+                getSalt(),
+                getName()
+        );
+    }
+    
+    private SecretKey getSecretKey(String password){
+        return pbkdf2.createSecretKey(
+                password,
+            this.getSalt()
+        );
+    }
+    private SecretKey generateSecretKey(String password){
+        return pbkdf2.createSecretKey(
+                password,
+                this.getSalt()
+        );
+    }
     public String getName(){
         return this.name;
     }
@@ -63,34 +64,33 @@ public class User {
         return this.salt;
     }
     
-    public String getCode(){
+    public String getCode(String password){
         return this.twoFA.getTOTPCode(
-            getSecretKey()
+            getSecretKey(password)
         );
     }
     
     public boolean validateName(String name){
-        return name.equals(
-            this.getPlanTextName()
-        );
+        return getName().equals(scrypt.createDerivedKey(name, getSalt()));
     }
     
     public boolean validatePassword(String password){
         return password.equals(
-            this.getPlanTextPassword()
+            this.getPlanTextPassword(password)
         );
     }
     
-    public boolean validadeCode(String code){
-        return code.equals(this.getCode());
+    public boolean validadeCode(String code, String password){
+        String text = this.getCode(password);
+        return code.equals(text);
     }
     
     public String encriptName(String name){
-        return this.scrypt.encrypt(name, getSalt());
+        return this.scrypt.createDerivedKey(name, getSalt());
     }
 
     public String encriptPassword(String password){
-        return this.gcm.encrypt(password, getSecretKey());
+        return this.gcm.encrypt(password, generateSecretKey(password), getSalt(), getName());
     }
     
     public String generateSalt(){

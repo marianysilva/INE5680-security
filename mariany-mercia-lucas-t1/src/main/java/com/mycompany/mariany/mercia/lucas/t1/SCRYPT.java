@@ -41,7 +41,7 @@ public class SCRYPT {
     }
     
    
-    public String encrypt(String text, String salt){
+    public String createDerivedKey(String text, String salt){
         byte[] derivedKeyFromScrypt;
         derivedKeyFromScrypt = useScryptKDF(
             text.toCharArray(),
@@ -66,16 +66,5 @@ public class SCRYPT {
         return derivatedText;
     }
     
-    public String decrypt(String derivatedText, String salt){
-        String text = "-----";
 
-        System.out.println(
-            "[DEBUG] SCRYPT DECRIPT:"
-            + "\n[DEBUG] -- derivatedText: " + derivatedText
-            + "\n[DEBUG] -- salt: " + salt
-            + "\n[DEBUG] -- text: " + text
-        );
-
-        return text;
-    }
 }

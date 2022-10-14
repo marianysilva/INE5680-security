@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module org.jetbrains.idea.maven.project.MavenProjectsManager.isMavenModule="true" type="JAVA_MODULE" version="4">
+  <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_8">
+    <output url="file://$MODULE_DIR$/mariany-mercia-lucas-t1/target/classes" />
+    <output-test url="file://$MODULE_DIR$/mariany-mercia-lucas-t1/target/test-classes" />
+    <content url="file://$MODULE_DIR$/mariany-mercia-lucas-t1">
+      <sourceFolder url="file://$MODULE_DIR$/mariany-mercia-lucas-t1/src/main/java" isTestSource="false" />
+      <excludeFolder url="file://$MODULE_DIR$/mariany-mercia-lucas-t1/target" />
+    </content>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="Maven: commons-codec:commons-codec:1.10" level="project" />
+    <orderEntry type="library" name="Maven: com.google.zxing:javase:3.2.1" level="project" />
+    <orderEntry type="library" name="Maven: com.google.zxing:core:3.2.1" level="project" />
+    <orderEntry type="library" name="Maven: com.beust:jcommander:1.48" level="project" />
+    <orderEntry type="library" name="Maven: de.taimos:totp:1.0" level="project" />
+    <orderEntry type="library" name="Maven: org.bouncycastle:bc-fips:1.0.2" level="project" />
+    <orderEntry type="library" name="googlecode.json.simple" level="project" />
+  </component>
+</module>
