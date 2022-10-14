@@ -41,7 +41,7 @@ public class SCRYPT {
     }
     
    
-    public String encrypt(String text, String salt){
+    public String createDerivedKey(String text, String salt){
         byte[] derivedKeyFromScrypt;
         derivedKeyFromScrypt = useScryptKDF(
             text.toCharArray(),

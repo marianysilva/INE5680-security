@@ -1,7 +1,6 @@
 package com.mycompany.mariany.mercia.lucas.t1;
 
 import javax.crypto.SecretKey;
-import java.security.NoSuchAlgorithmException;
 
 /**
  * @author Lucas Nascimento Falcão (17100915)
@@ -31,11 +30,11 @@ public class Main {
     
             SecretKey secretKey = pbkdf2.createSecretKey(password, salt); // ok
              
-            String textSCRYPTencrypt = scrypt.encrypt(name, salt); // ok
+            String textSCRYPTencrypt = scrypt.createDerivedKey(name, salt); // ok
             String textSCRYPTdecrypt = scrypt.decrypt(textSCRYPTencrypt, salt); // to do
     
-            String textGCMencrypt = gcm.encrypt(password, secretKey, salt); // ok
-            String textGCMdecrypt = gcm.decrypt(textGCMencrypt, secretKey, salt); // ok
+            String textGCMencrypt = gcm.encrypt(password, secretKey, salt, name); // ok
+            String textGCMdecrypt = gcm.decrypt(textGCMencrypt, secretKey, salt, name); // ok
             
             String code = twoFA.getTOTPCode(secretKey); // ok
     

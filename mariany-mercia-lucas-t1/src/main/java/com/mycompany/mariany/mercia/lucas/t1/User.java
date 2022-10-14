@@ -35,7 +35,8 @@ public class User {
         return gcm.decrypt(
                 this.getPassword(),
                 this.getSecretKey(password),
-                getSalt()
+                getSalt(),
+                getName()
         );
     }
     
@@ -78,7 +79,7 @@ public class User {
     }
     
     public boolean validateName(String name){
-        return getName().equals(scrypt.encrypt(name, getSalt()));
+        return getName().equals(scrypt.createDerivedKey(name, getSalt()));
     }
     
     public boolean validatePassword(String password){
@@ -93,11 +94,11 @@ public class User {
     }
     
     public String encriptName(String name){
-        return this.scrypt.encrypt(name, getSalt());
+        return this.scrypt.createDerivedKey(name, getSalt());
     }
 
     public String encriptPassword(String password){
-        return this.gcm.encrypt(password, generateSecretKey(password), getSalt());
+        return this.gcm.encrypt(password, generateSecretKey(password), getSalt(), getName());
     }
     
     public String generateSalt(){

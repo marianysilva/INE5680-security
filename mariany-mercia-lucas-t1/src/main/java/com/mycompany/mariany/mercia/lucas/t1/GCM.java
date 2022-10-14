@@ -1,7 +1,5 @@
 package com.mycompany.mariany.mercia.lucas.t1;
 
-import org.bouncycastle.util.encoders.Hex;
-
 import javax.crypto.Cipher;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.GCMParameterSpec;
@@ -19,11 +17,14 @@ public class GCM {
     private final int T_LEN = 128;
     
     private Cipher encryptionCipher;
+
+    SCRYPT scrypt = new SCRYPT();
     
-    public String encrypt(String text, SecretKey secretKey, String salt){
+    public String encrypt(String text, SecretKey secretKey, String salt, String name){
         try {
             byte[] messageInBytes = text.getBytes();
-            byte[] nonce = org.apache.commons.codec.binary.Hex.decodeHex(salt.toCharArray());
+            String derivedKey = scrypt.createDerivedKey(name,salt);
+            byte[] nonce = org.apache.commons.codec.binary.Hex.decodeHex(derivedKey.toCharArray());
             GCMParameterSpec​ gcmParameters = new GCMParameterSpec​(T_LEN, nonce);
             encryptionCipher = Cipher.getInstance("AES/GCM/NoPadding", "BCFIPS");
             encryptionCipher.init(Cipher.ENCRYPT_MODE, secretKey, gcmParameters);
@@ -46,11 +47,12 @@ public class GCM {
     }
     
         
-    public String decrypt(String derivatedText, SecretKey secretKey, String salt){
+    public String decrypt(String derivatedText, SecretKey secretKey, String salt, String name){
         try {
             byte[] messageInBytes = decode(derivatedText);
             Cipher decryptionCipher = Cipher.getInstance("AES/GCM/NoPadding", "BCFIPS");
-            byte[] nonce = org.apache.commons.codec.binary.Hex.decodeHex(salt.toCharArray());
+            String derivedKey = scrypt.createDerivedKey(name,salt);
+            byte[] nonce = org.apache.commons.codec.binary.Hex.decodeHex(derivedKey.toCharArray());
             GCMParameterSpec​ gcmParameters = new GCMParameterSpec​(T_LEN, nonce);
             decryptionCipher.init(Cipher.DECRYPT_MODE, secretKey, gcmParameters);
             byte[] decryptedBytes = decryptionCipher.doFinal(messageInBytes);
